@@ -75,16 +75,48 @@
 
 <script setup>
 import { reactive, ref } from 'vue'
+import emailjs from '@emailjs/browser'
 
-const form = reactive({ name: '', email: '', subject: '', message: '' })
+const form = reactive({
+  name: '',
+  email: '',
+  subject: '',
+  message: '',
+})
+
 const submitted = ref(false)
 
-function handleSubmit() {
-  submitted.value = true
-  setTimeout(() => {
-    submitted.value = false
-    Object.assign(form, { name: '', email: '', subject: '', message: '' })
-  }, 3000)
+async function handleSubmit() {
+  try {
+    await emailjs.send(
+      'service_xe8z10p',
+      'template_xsi8aif',
+      {
+        name: form.name,
+        email: form.email,
+        subject: form.subject,
+        message: form.message,
+      },
+      'bi1SbBBjxSg18zMZN'
+    )
+
+    submitted.value = true
+
+    Object.assign(form, {
+      name: '',
+      email: '',
+      subject: '',
+      message: '',
+    })
+
+    setTimeout(() => {
+      submitted.value = false
+    }, 3000)
+
+  } catch (error) {
+    console.error(error)
+    alert('Failed to send message.')
+  }
 }
 </script>
 
