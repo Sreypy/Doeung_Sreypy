@@ -24,36 +24,30 @@
 
       <div class="hero-visual anim-slide-left" style="animation-delay: 0.3s">
         <div class="avatar-wrapper">
+          <!-- Subtle glow behind card -->
           <div class="glow-ring"></div>
-          <div class="rotate-ring"></div>
-          <div class="rotate-ring-2"></div>
-          <div class="orbit-track">
-            <div class="orbit-dot orbit-dot-1"></div>
-          </div>
-          <div class="orbit-track-2">
-            <div class="orbit-dot orbit-dot-2"></div>
-          </div>
+
+          <!-- Formal card frame -->
           <div class="avatar-float">
-            <div class="avatar-circle">
-              <img src="/profile.jpg" alt="Doeung Sreypy" class="profile-img" />
+            <div class="avatar-card">
+              <div class="avatar-card-inner">
+                <img src="/profile.jpg" alt="Doeung Sreypy" class="profile-img" />
+                <!-- Name plate at bottom -->
+                <div class="name-plate">
+                  <p class="name-plate-name">Doeung Sreypy</p>
+                  <p class="name-plate-role">Web Developer · UI/UX</p>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="badge badge-tl">UI/UX</div>
-          <div class="badge badge-br">Dev</div>
+
+          <!-- Decorative corner accents -->
+          <div class="corner corner-tl"></div>
+          <div class="corner corner-tr"></div>
+          <div class="corner corner-bl"></div>
+          <div class="corner corner-br"></div>
         </div>
 
-        <div class="floating-tags anim-slide-up" style="animation-delay: 0.7s">
-          <span class="ftag ftag-html">HTML</span>
-          <span class="ftag ftag-css">CSS</span>
-          <span class="ftag ftag-js">JavaScript</span>
-          <span class="ftag ftag-vue">Vue.js</span>
-          <span class="ftag ftag-react">React.js</span>
-          <span class="ftag ftag-node">Node.js</span>
-          <span class="ftag ftag-git">Git</span>
-          <span class="ftag ftag-figma">Figma</span>
-          <span class="ftag ftag-flutter">Flutter</span>
-          <span class="ftag ftag-ui">UI/UX</span>
-        </div>
       </div>
 
     </div>
@@ -88,7 +82,7 @@
   gap: 60px;
 }
 
-/* ── Text entry animations ── */
+/* ── Text animations ── */
 @keyframes slideUp {
   from { opacity: 0; transform: translateY(32px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -97,7 +91,6 @@
   from { opacity: 0; transform: translateX(40px); }
   to   { opacity: 1; transform: translateX(0); }
 }
-
 .anim-slide-up {
   opacity: 0;
   animation: slideUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
@@ -107,7 +100,7 @@
   animation: slideLeft 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
-/* ── Typewriter on name ── */
+/* ── Typewriter ── */
 .typewriter {
   display: inline-block;
   overflow: hidden;
@@ -146,7 +139,6 @@
   to { background-position: 200% center; }
 }
 
-/* ── Title ── */
 .hero-title {
   font-size: clamp(36px, 5vw, 56px);
   color: var(--text-primary);
@@ -154,8 +146,6 @@
   letter-spacing: -0.03em;
 }
 .hero-name { color: var(--purple-500); font-style: italic; }
-
-/* ── Desc ── */
 .hero-desc {
   font-size: 16px;
   color: var(--text-secondary);
@@ -165,7 +155,6 @@
   font-weight: 300;
 }
 
-/* ── Buttons ── */
 .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
 .btn {
   display: inline-flex;
@@ -191,117 +180,99 @@
   align-items: center;
   gap: 32px;
 }
+
 .avatar-wrapper {
   position: relative;
-  width: 300px;
-  height: 300px;
+  width: 260px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* Glow pulse */
+/* Subtle glow behind */
 .glow-ring {
   position: absolute;
-  inset: -16px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(83,74,183,0.18) 0%, transparent 70%);
-  animation: glowPulse 3s ease-in-out infinite;
+  inset: -24px;
+  border-radius: 20px;
+  background: radial-gradient(circle, rgba(83,74,183,0.12) 0%, transparent 70%);
+  animation: glowPulse 4s ease-in-out infinite;
+  pointer-events: none;
 }
 @keyframes glowPulse {
-  0%, 100% { transform: scale(1); opacity: 0.6; }
-  50%       { transform: scale(1.12); opacity: 1; }
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50%       { opacity: 1;   transform: scale(1.04); }
 }
 
-/* Rotating rings */
-.rotate-ring {
-  position: absolute;
-  inset: -14px;
-  border-radius: 50%;
-  border: 2px dashed var(--purple-200);
-  animation: spinCW 10s linear infinite;
+/* Formal card frame */
+.avatar-float {
+  animation: floatUpDown 5s ease-in-out infinite;
+  width: 100%;
 }
-.rotate-ring-2 {
-  position: absolute;
-  inset: -4px;
-  border-radius: 50%;
-  border: 1.5px dashed rgba(83,74,183,0.2);
-  animation: spinCCW 14s linear infinite;
-}
-@keyframes spinCW  { to { transform: rotate(360deg); } }
-@keyframes spinCCW { to { transform: rotate(-360deg); } }
-
-/* Orbiting dots */
-.orbit-track, .orbit-track-2 {
-  position: absolute;
-  inset: -14px;
-  border-radius: 50%;
-}
-.orbit-track   { animation: spinCW  10s linear infinite; }
-.orbit-track-2 { animation: spinCCW 7s linear infinite; }
-
-.orbit-dot { position: absolute; border-radius: 50%; }
-.orbit-dot-1 {
-  width: 16px; height: 16px;
-  background: var(--purple-500);
-  top: -8px; left: calc(50% - 8px);
-  box-shadow: 0 0 0 4px rgba(83,74,183,0.2), 0 0 12px rgba(83,74,183,0.5);
-}
-.orbit-dot-2 {
-  width: 12px; height: 12px;
-  background: var(--teal-500);
-  bottom: -6px; left: calc(50% - 6px);
-  box-shadow: 0 0 0 3px rgba(29,158,117,0.2), 0 0 10px rgba(29,158,117,0.5);
-}
-
-/* Float up/down */
-.avatar-float { animation: floatUpDown 4s ease-in-out infinite; }
 @keyframes floatUpDown {
   0%, 100% { transform: translateY(0); }
-  50%       { transform: translateY(-12px); }
+  50%       { transform: translateY(-10px); }
 }
 
-.avatar-circle {
-  width: 260px;
-  height: 260px;
-  border-radius: 50%;
-  overflow: hidden;
-  background: var(--purple-50);
-  border: 3px solid var(--purple-200);
-  box-shadow: 0 0 0 8px rgba(83,74,183,0.06), 0 20px 48px rgba(83,74,183,0.2);
+.avatar-card {
+  border-radius: 16px;
+  padding: 6px;
+  background: linear-gradient(145deg, var(--purple-200), rgba(175,169,236,0.3), var(--purple-200));
+  box-shadow:
+    0 20px 60px rgba(83,74,183,0.2),
+    0 4px 16px rgba(83,74,183,0.1);
 }
+
+.avatar-card-inner {
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--surface);
+  position: relative;
+}
+
 .profile-img {
   width: 100%;
-  height: 110%;
+  height: 290px;
   object-fit: cover;
-  object-position: center 10%;
+  object-position: center 5%;
   display: block;
+  filter: contrast(1.02) brightness(1.01);
 }
 
-/* Corner badges */
-.badge {
-  position: absolute;
+/* Name plate */
+.name-plate {
+  padding: 14px 16px;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  text-align: center;
+}
+.name-plate-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+  font-family: 'DM Serif Display', serif;
+  margin-bottom: 2px;
+}
+.name-plate-role {
   font-size: 11px;
-  font-weight: 600;
-  padding: 5px 12px;
-  border-radius: 20px;
-  letter-spacing: 0.04em;
-  animation: floatUpDown 4s ease-in-out infinite;
+  color: var(--purple-500);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
-.badge-tl {
-  top: 16px; left: -8px;
-  background: var(--purple-50);
-  color: var(--purple-800);
-  border: 1px solid var(--purple-200);
-  animation-delay: 0.5s;
+
+/* Decorative corner accents */
+.corner {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-color: var(--purple-500);
+  border-style: solid;
+  opacity: 0.5;
 }
-.badge-br {
-  bottom: 16px; right: -8px;
-  background: #E6F7F0;
-  color: #1a6645;
-  border: 1px solid #9FE1CB;
-  animation-delay: 1s;
-}
+.corner-tl { top: -6px; left: -6px; border-width: 2px 0 0 2px; border-radius: 3px 0 0 0; }
+.corner-tr { top: -6px; right: -6px; border-width: 2px 2px 0 0; border-radius: 0 3px 0 0; }
+.corner-bl { bottom: -6px; left: -6px; border-width: 0 0 2px 2px; border-radius: 0 0 0 3px; }
+.corner-br { bottom: -6px; right: -6px; border-width: 0 2px 2px 0; border-radius: 0 0 3px 0; }
 
 /* Tags */
 .floating-tags {
@@ -336,7 +307,7 @@
   .hero-desc { margin: 0 auto 32px; }
   .hero-ctas { justify-content: center; }
   .hero-visual { order: -1; }
-  .avatar-wrapper { width: 240px; height: 240px; }
-  .avatar-circle { width: 210px; height: 210px; }
+  .avatar-wrapper { width: 200px; }
+  .profile-img { height: 260px; }
 }
 </style>
